@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='weather.css') }}">
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="header-logo">
+            <img src="{{ url_for('static', filename='images/AgroConnect.jpg') }}" alt="AgroConnect Logo">
+            <span>AgroConnect</span>
+        </div>
+        <nav class="header-nav">
+            <ul>
+                <li><a href="{{ url_for('main_page') }}">Home</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="weather-container">
+        <h1 class="weather-title">Weather for {{ location }}</h1>
+
+        <div class="weather"><!-- Current Weather Section -->
+            <div class="today-weather">
+                <a>
+                    <h2>Today's Weather</h2>
+                    <img src="{{ today.icon }}" alt="{{ today.description }}">
+                    <p>Temperature: {{ today.temp }}</p>
+                    <p>Description: {{ today.description }}</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Move 7-Day Forecast Heading Here -->
+        <h2 class="forecast-days-heading">7-Day Forecast</h2>
+
+        <!-- Forecast Weather Section -->
+        <div class="forecast-days">
+            {% for day in forecast %}
+            <div class="day-card">
+                <h2>{{ day.date.split(',')[0] }}</h2>
+                <p class="date">{{ day.date.split(',')[1] }}</p>
+                <img src="{{ day.icon }}" alt="{{ day.description }}">
+                <p>Average Temp: {{ day.avg_temp }}</p>
+                <p>{{ day.description }}</p>
+                <p>Rainfall: {{ day.rainfall }}</p>
+                <p>Precipitation: {{ day.precipitation_chance }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

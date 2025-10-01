@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+body {
+    margin: 0;
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(to bottom, #8fd3f4, #84fab0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.login-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+}
+
+.logo img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.title {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #4caf50;
+    margin-bottom: 5px;
+}
+
+.title span {
+    color: #4caf50;
+}
+
+.subtitle {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid #4caf50;
+}
+
+.forgot-password {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.forgot-password a {
+    color: #4caf50;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+.signup-text {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+.signup-text a {
+    color: #4caf50;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.signup-text a:hover {
+    text-decoration: underline;
+}
+
+.back-to-login {
+    margin-top: 15px;
+}
+
+.back-to-login a {
+    color: #4caf50;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.back-to-login a:hover {
+    text-decoration: underline;
+}

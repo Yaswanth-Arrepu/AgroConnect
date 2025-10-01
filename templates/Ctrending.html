@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroCommunity - Trending</title>
+    <style>
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background: linear-gradient(to bottom right, #FFD1DC, #D5E8D4, #AEC6CF);
+            width: 100vw;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .header {
+            width: 96.5%;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 20px;
+            height: 40px;
+            background: #008000;
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+        }
+        .header-buttons, .nav-bar nav {
+            display: flex;
+            gap: 10px;
+        }
+        .header-buttons button, .nav-bar button {
+            background: white;
+            padding: 8px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .header-buttons button a {
+            text-decoration: none;
+            color: #970505;
+        }
+        .header-buttons button:hover {
+            background: #ddd;
+        }
+        .nav-bar {
+            width: 96.5%;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 20px;
+            margin-top: 15px;
+            height: 40px;
+            background: #d3d3d3;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .nav-bar button {
+            color: black;
+            margin-right: 45px;
+            background: transparent;
+            font-size: 18px;
+            border-radius: 20px;
+        }
+        .nav-bar button a {
+            text-decoration: none;
+            color: black;
+        }
+        .nav-bar button:hover {
+            background: #008000;
+            color: white;
+        }
+        .create-post {
+            background: black;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+        .post {
+            background: #d3d3d3;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            position: relative;
+        }
+        .post .time {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 0.9em;
+            color: #555;
+        }
+        .actions-container {
+            display: flex;
+            justify-content: space-around;
+            background: #ccc;
+            padding: 5px;
+            border-radius: 5px;
+            margin-top: 10px;
+            width: 50%;
+        }
+        .actions-container button {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            background: white;
+            cursor: pointer;
+        }
+        .actions-container button:hover {
+            background: #bbb;
+        }
+    </style>
+    <script>
+        function handleLike(button) {
+            let count = button.querySelector("span");
+            count.textContent = parseInt(count.textContent) + 1;
+        }
+        function handleDislike(button) {
+            let count = button.querySelector("span");
+            count.textContent = parseInt(count.textContent) + 1;
+        }
+        function handleComment(button) {
+            let comment = prompt("Enter your comment:");
+            if (comment) {
+                alert("Comment added: " + comment);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">AGROCOMMUNITY</div>
+            <div class="header-buttons">
+                <button class="home-btn"><a href="{{ url_for('main_page') }}">Home</a></button>
+                <button class="logout-btn"><a href="{{ url_for('logout') }}">Logout</a></button>
+            </div>
+        </div>
+        <div class="nav-bar">
+            <nav>
+                <button class="active"><a href="{{ url_for('community') }}">Home</a></button>
+                <button class="active"><a href="{{ url_for('trending') }}">Trending</a></button>
+            </nav>
+            <a href="{{ url_for('create_post') }}" class="create-post">CREATE A POST</a>
+        </div>
+        
+        <main>
+            {% if data %}
+                {% for post in data %}
+                    <div class="post">
+                        <h3>{{ post.title }}</h3>
+                        <p>{{ post.description }}</p>
+                        <p><strong>Posted by:</strong> {{ post.userid }}</p>
+                        <p class="time"><strong>Likes:</strong> {{ post.likes }}</p>
+                        
+                        <div class="actions-container">
+                            <button onclick="handleLike(this)">Like <span>{{ post.likes }}</span></button>
+                            <button onclick="handleDislike(this)">Dislike</button>
+                            <button onclick="handleComment(this)">Comment</button>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No trending posts available.</p>
+            {% endif %}
+        </main>
+    </div>
+</body>
+</html>

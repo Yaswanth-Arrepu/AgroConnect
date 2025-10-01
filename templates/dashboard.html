@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmer Dashboard - AgroConnect</title>
+  <link rel="stylesheet" href="{{url_for('static',filename='dashboard.css')}}">
+</head>
+<body>
+  <header class="dashboard-header">
+    <div class="header-logo">
+      <img src="{{url_for('static',filename='images/AgroConnect.jpg')}}" alt="AgroConnect Logo">
+      <span>AgroConnect</span>
+    </div>
+    <nav class="header-nav">
+      <ul>
+        <li><a href="{{url_for('logout')}}">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="dashboard-container">
+    <h1 class="dashboard-title">Welcome to AgroConnect</h1>
+    <div class="circle-container">
+      <div class="main-circle">
+        <img src="{{url_for('static',filename='images/AgroConnect.jpg')}}" alt="Farmer Image" class="farmer-image">
+      </div>
+
+      <a href="{{url_for('crop_recommendation')}}" class="feature-circle crop-recommendations">
+        <img src="{{url_for('static',filename='images/croprecomendation.jpg')}}" alt="Crop Recommendations">
+        <span>Crop Recommendation</span>
+      </a>
+      <a href="{{url_for('schemes')}}" class="feature-circle government-schemes">
+        <img src="{{url_for('static',filename='images/Schemes.jpg')}}" alt="Government Schemes">
+        <span>Government Schemes</span>
+      </a>
+      <a href="{{url_for('market')}}" class="feature-circle live-market-prices">
+        <img src="{{url_for('static',filename='images/liveprices.avif')}}" alt="Live Market Prices">
+        <span>Live Market Prices</span>
+      </a>
+      <a href="{{url_for('get_cordinates')}}" class="feature-circle weather-forecast">
+        <img src="{{url_for('static',filename='images/Weather.webp')}}" alt="Weather Forecast">
+        <span>Weather Forecast</span>
+      </a>
+      <a href="{{url_for('community')}}" class="feature-circle community-forums">
+        <img src="{{url_for('static',filename='images/community.webp')}}" alt="Community Forums">
+        <span>Community Forums</span>
+      </a>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const circles = document.querySelectorAll('.feature-circle');
+      const tooltip = document.createElement('div');
+      tooltip.id = 'tooltip';
+      document.body.appendChild(tooltip);
+
+      circles.forEach(circle => {
+        circle.addEventListener('mouseover', (e) => {
+          const name = circle.querySelector('span').textContent;
+          tooltip.textContent = name;
+          tooltip.style.display = 'block';
+          tooltip.style.left = `${e.pageX + 10}px`;
+          tooltip.style.top = `${e.pageY + 10}px`;
+        });
+
+        circle.addEventListener('mousemove', (e) => {
+          tooltip.style.left = `${e.pageX + 10}px`;
+          tooltip.style.top = `${e.pageY + 10}px`;
+        });
+
+        circle.addEventListener('mouseout', () => {
+          tooltip.style.display = 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html> 

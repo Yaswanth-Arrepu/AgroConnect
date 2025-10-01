@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Market Prices</title>
+    <style>
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: #EDE7F6; /* Light lavender */
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin: auto;
+            margin-top:40px;
+        }
+        select, button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .market-data {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #28a745;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .pagination {
+            margin-top: 10px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .pagination button {
+            width: 40px;
+            padding: 8px;
+            border: none;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            font-size: 22px;
+        }
+        .pagination button:hover {
+            background-color: #0056b3;
+        }
+        .page-info {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .loading {
+            display: none;
+            font-size: 16px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .header {
+            width: 96.5%;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 20px;
+            height: 40px;
+            background: green;
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+            outline: 4px solidrgb(11, 145, 241);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header-buttons, .nav-bar nav {
+            display: flex;
+            gap: 10px;
+        }
+        .header-buttons button, .nav-bar button {
+            background: white;
+            padding: 8px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .header-buttons button a {
+            text-decoration: none;
+            color: #970505;
+        }
+        .header-buttons button:hover {
+            background: #ddd;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-container img {
+            width: 40px; /* Adjust size as needed */
+            height: 40px;
+            border-radius: 50%; /* Makes the logo round (optional) */
+        }
+        .logo-text {
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+        }
+        
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/AgroConnect.jpg') }}" alt="AgroCommunity Logo">
+            <span class="logo-text">AGROCOMMUNITY</span>
+        </div>
+        <div class="header-buttons">
+            <button><a href="{{ url_for('main_page') }}">Home</a></button>
+            <button><a href="{{ url_for('logout') }}">Logout</a></button>
+        </div>
+    </div>
+<div class="container">
+    <h2>Live Market Prices</h2>
+    
+    <form method="POST" onsubmit="showLoading()">
+        <label for="state">Select State:</label>
+        <select id="state" name="State">
+            <option value="">-- Select State --</option>
+            {% for state in ["Andhra Pradesh", "Assam", "Bihar", "Chhattisgarh", "Chandigarh", "Goa", "Gujarat", 
+                             "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", 
+                             "Maharashtra", "Nagaland", "Odisha", "Puducherry", "Punjab", "Rajasthan", "Tamil Nadu", 
+                             "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"] %}
+                <option value="{{ state }}" {% if request.form.get('State') == state %}selected{% endif %}>{{ state }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Get Prices</button>
+        <p class="loading" id="loading">Loading...</p>
+    </form>
+    
+    <div class="market-data">
+        {% if error %}
+            <p class="error-message">{{ error }}</p>
+        {% elif data is not none and not data.empty %}
+            <h3>Market Prices in {{ request.form['State'] }}</h3>
+            <table id="marketTable">
+                <thead>
+                    <tr>
+                        <th>APMC</th>
+                        <th>Commodity</th>
+                        <th>Min Price</th>
+                        <th>Modal Price</th>
+                        <th>Max Price</th>
+                        <th>Unit</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in data.iterrows() %}
+                    <tr>
+                        <td>{{ row[1]["APMC"] }}</td>
+                        <td>{{ row[1]["Commodity"] }}</td>
+                        <td>{{ row[1]["Min Price"] }}</td>
+                        <td>{{ row[1]["Modal Price"] }}</td>
+                        <td>{{ row[1]["Max Price"] }}</td>
+                        <td>{{ row[1]["Unit"] }}</td>
+                        <td>{{ row[1]["Date"] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="page-info">Page No: <span id="pageNumber">1</span></div>
+            <div class="pagination">
+                <button onclick="changePage(-1)">&#8592;</button>
+                <button onclick="changePage(1)">&#8594;</button>
+            </div>
+        {% else %}
+            <p>Select a state and click "Get Prices" to see live prices.</p>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    let currentPage = 1;
+    const rowsPerPage = 10;
+
+    function changePage(direction) {
+        let table = document.getElementById("marketTable").getElementsByTagName("tbody")[0];
+        let rows = table.getElementsByTagName("tr");
+        let totalPages = Math.ceil(rows.length / rowsPerPage);
+        
+        currentPage += direction;
+        if (currentPage < 1) currentPage = 1;
+        if (currentPage > totalPages) currentPage = totalPages;
+        
+        document.getElementById("pageNumber").innerText = currentPage;
+
+        for (let i = 0; i < rows.length; i++) {
+            rows[i].style.display = (i >= (currentPage - 1) * rowsPerPage && i < currentPage * rowsPerPage) ? "" : "none";
+        }
+    }
+
+    function showLoading() {
+        document.getElementById("loading").style.display = "block";
+    }
+
+    document.addEventListener("DOMContentLoaded", () => changePage(0));
+</script>
+
+</body>
+</html>

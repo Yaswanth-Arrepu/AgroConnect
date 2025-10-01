@@ -1,0 +1,145 @@
+/* Basic Styles */
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(to right, #FF9933, white, #138808);
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+
+
+/* Header */
+h1 {
+    text-align: center;
+    color: #060606;
+    margin-bottom: 20px;
+    margin-top: 80px;
+}
+
+/* Form */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Scheme List */
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #fff;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+strong {
+    color: #4CAF50;
+}
+
+/* Loading Animation */
+#loading {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#loading img {
+    width: 50px;
+    height: 50px;
+}
+
+.header {
+    width: 96.5%;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    height: 40px;
+    background:linear-gradient(to right, #FF9933, white, #138808);
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    outline: 2px solid #2E7D32;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+}
+.header-buttons, .nav-bar nav {
+    display: flex;
+    gap: 10px;
+}
+.header-buttons button, .nav-bar button {
+    background: white;
+    padding: 8px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.header-buttons button a {
+    text-decoration: none;
+    color: #970505;
+}
+.header-buttons button:hover {
+    background: #ddd;
+}
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.logo-container img {
+    width: 40px; /* Adjust size as needed */
+    height: 40px;
+    border-radius: 50%; /* Makes the logo round (optional) */
+}
+.logo-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}

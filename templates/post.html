@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroCommunity</title>
+    <style>
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background: linear-gradient(to bottom right, #FFD1DC, #D5E8D4, #AEC6CF);
+            width: 100vw;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .header {
+            width: 96.5%;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 20px;
+            height: 40px;
+            background: #008000;
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+        }
+        .header-buttons, .nav-bar nav {
+            display: flex;
+            gap: 10px;
+        }
+        .header-buttons button, .nav-bar button {
+            background: white;
+            padding: 8px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .header-buttons button a {
+            text-decoration: none;
+            color: #970505;
+        }
+        .header-buttons button:hover {
+            background: #ddd;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-container img {
+            width: 40px; /* Adjust size as needed */
+            height: 40px;
+            border-radius: 50%; /* Makes the logo round (optional) */
+        }
+        .logo-text {
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .nav-bar {
+            width: 96.5%;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 20px;
+            margin-top: 15px;
+            height: 40px;
+            background: #d3d3d3;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .nav-bar button {
+            color: black;
+            margin-right: 45px;
+            background: transparent;
+            font-size: 18px;
+            border-radius: 20px;
+        }
+        .nav-bar button a {
+            color: black;
+            text-decoration: none;
+        }
+        .nav-bar button:hover {
+            background: #008000;
+            color: white;
+        }
+        .create-post-container {
+            width: 90%;
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin-top: 100px;
+        }
+        .editor-container {
+            width: 100%;
+            max-width: 800px;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+        .title-input {
+            width: 100%;
+            max-width: 800px;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px; /* Adds space below the title input */
+        }
+        
+        .editor-container {
+            height: 300px; 
+            background: #f5f5f5;
+            box-shadow: inset 0px 3px 6px rgba(0, 0, 0, 0.1);
+        }
+        .post-btn {
+            background: black;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+            font-size: 16px;
+            display: block; /* Makes sure it behaves like a block element */
+            margin-left: auto;
+            margin-right: auto; /* Centers it horizontally */
+            text-align: center;
+        }
+        .post-btn:hover {
+            background: #555;
+        }
+        
+    </style>
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='images/AgroConnect.jpg') }}" alt="AgroCommunity Logo">
+                <span class="logo-text">AGROCOMMUNITY</span>
+            </div>
+            <div class="header-buttons">
+                <button><a href="{{ url_for('main_page') }}">Home</a></button>
+                <button><a href="{{ url_for('logout') }}">Logout</a></button>
+            </div>
+        </div>
+        
+        <div class="nav-bar">
+            <nav>
+                <button class="active"><a href="{{ url_for('community') }}">Home</a></button>
+                <button class="active"><a href="{{ url_for('trending') }}">Trending</a></button>
+            </nav>
+        </div>
+        <div class="create-post-container">
+            <h2>Write Your Thoughts</h2>
+            <form method="POST" action="{{ url_for('create_post') }}" onsubmit="updateEditorContent()">
+                <input type="text" name="title" id="post-title" class="title-input" placeholder="Enter title of the post..." required>
+                <textarea name="description" id="editor"></textarea>
+                <button type="submit" class="post-btn">Post</button>
+            </form>
+            
+            <script>
+                CKEDITOR.replace('editor', { height: 200 });
+            
+                function updateEditorContent() {
+                    document.querySelector('textarea[name="description"]').value = CKEDITOR.instances.editor.getData();
+                }
+            </script>
+        </div>
+    </div>
+    <script>
+        CKEDITOR.replace('editor', { height: 200 });
+    </script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #ccefff, #e6f9ff);
+    color: #333;
+    text-align: center;
+}
+
+.weather-container {
+    margin: 20px auto;
+    margin-top: 80px;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+.weather-title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.weather-heading-box {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #00b3ff; /* Creates the box */
+    border-radius: 8px; /* Rounds the corners */
+    margin-bottom: 20px; /* Adds spacing between the box and rows below */
+    background: #e6f9ff; /* Matches the gradient background for consistency */
+    text-align: center; /* Centers the heading */
+}
+
+.highlight {
+    color: #00b3ff;
+}
+
+/* Today's Weather Section */
+.today-weather {
+    width: 25%;
+    margin: 0 auto 20px; /* Center the container */
+    background: #d0e7ff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s, background-color 0.3s; /* Add transition for hover effect */
+}
+
+.today-weather:hover {
+    transform: scale(1.05); /* Scale up on hover */
+    background-color: #cce0ff; /* Change background color on hover */
+}
+
+.today-weather a {
+    text-decoration: none; /* Remove underlines */
+    color: inherit; /* Inherit the current color */
+}
+
+.today-weather img {
+    width: 120px; /* Increase image size */
+    margin: 20px 0;
+}
+
+/* 7-Day Forecast Heading */
+.forecast-days-heading {
+    font-size: 2.5rem;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: #00b3ff;
+}
+
+/* Forecast Days Section */
+.forecast-days {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center align the containers */
+    margin-top: 20px;
+}
+
+.day-card {
+    background-color: #d0e7ff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px; /* Maintain same spacing between containers */
+    width: calc(25% - 40px); /* 4 containers per row, accounting for margins */
+    box-sizing: border-box;
+    transition: transform 0.3s;
+}
+
+.day-card:hover {
+    transform: scale(1.05);
+}
+
+.day-card h2 {
+    margin: 10px 0;
+    font-size: 1.5em;
+}
+
+.day-card .date {
+    font-size: 1em;
+    color: #666;
+}
+
+.day-card img {
+    width: 80px; /* Increase image size */
+    height: 80px; /* Increase image size */
+    margin: 10px 0;
+}
+
+.day-card p {
+    margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+    .day-card {
+        width: calc(50% - 40px); /* 2 containers per row for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .day-card {
+        width: calc(100% - 40px); /* 1 container per row for smallest screens */
+    }
+}
+
+/* Header */
+.dashboard-header {
+    width: 99%; /* Full width of the page */
+    height: 80px; /* Fixed height for the header */
+    background: #d0e7ff; /* Set a solid background color */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for better visibility */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    color: #161616f3;
+    position: fixed; /* Fix the header at the top */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure it's above other content */
+    border-bottom: 1px solid #ddd; /* Optional: Add a border at the bottom */
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.header-logo span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.header-nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.header-nav ul li {
+    margin: 0 15px;
+}
+
+.header-nav ul li a {
+    color: #161616f3;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+    font-weight: bold;
+}
+
+.header-nav ul li a:hover {
+    color: #84fab0;
+}

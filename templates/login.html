@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - AgroConnect</title>
+  <link rel="icon" href="{{url_for('static',filename="images/logo.jpg")}}" type="image/jpeg">
+  <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+  <style>
+    .flash-messages {
+      margin-bottom: 20px;
+    }
+    .alert {
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      text-align: center;
+      font-size: 14px;
+    }
+    .alert.error {
+      color: #721c24;
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+    }
+  </style>
+</head><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - AgroConnect</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .flash-messages {
+      margin-bottom: 20px;
+    }
+    .alert {
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      text-align: center;
+      font-size: 14px;
+    }
+    .alert.error {
+      color: #721c24;
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <div class='logo'>
+        <img src="{{url_for('static',filename="images/logo.jpg")}}" alt="AgroConnect Logo" style="width: 150px; height:auto;">
+      <h1 class="title">Welcome to <span>AgroConnect</span> </h1>
+      <p class="subtitle">Bridging farmers and technology</p>
+      <!-- Flash messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-messages">
+            {% for category, message in messages %}
+              <div class="alert {{ category }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+      <form action="{{ url_for('login') }}" method="POST">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <div class="forgot-password">
+          <a href="{{ url_for('forgot_password') }}">Forgot Password?</a>
+        </div>
+        <button type="submit" class="btn">Login</button>
+        <p class="signup-text">
+          Don't have an account? 
+          <a href="{{ url_for('signup') }}" onclick="event.preventDefault(); window.location.href=this.href;">Sign up</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

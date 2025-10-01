@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Location Permission</title>
+    <style>
+        /* General styling for the page */
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: url('{{ url_for('static', filename='images/Globe.jpeg') }}') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* Container for location content */
+        .location-container {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            border-radius: 18px;
+            padding: 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Title styling */
+        .location-container h1 {
+            font-size: 2rem;
+            color: #fdfd03;
+        }
+
+        /* Button styling */
+        .location-container button {
+            padding: 10px 35px;
+            border: none;
+            border-radius: 24px;
+            background: #0378fd;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Hover effect for the button */
+        .location-container button:hover {
+            background: #ddcfb5;
+        }
+
+        /* Header styling */
+        .dashboard-header {
+            width: 99%;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: #73fc03;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .header-logo span {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .header-nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-nav ul li {
+            margin: 0 15px;
+        }
+
+        .header-nav ul li a {
+            color: #73fc03;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+            font-weight: bold;
+        }
+
+        .header-nav ul li a:hover {
+            color: #84fab0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="dashboard-header">
+        <div class="header-logo">
+            <img src="{{ url_for('static', filename='images/AgroConnect.jpg') }}" alt="AgroConnect Logo">
+            <span>AgroConnect</span>
+        </div>
+        <nav class="header-nav">
+            <ul>
+                <li><a href="{{ url_for('main_page') }}">Home</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Location Request Section -->
+    <div class="location-container">
+        <h1>Get Weather Forecast</h1>
+        <button onclick="requestLocationPermission()">Locate</button>
+    </div>
+
+    <!-- JavaScript Section -->
+    <script>
+        function requestLocationPermission() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(async (position) => {
+                    const { latitude, longitude } = position.coords;
+                    try {
+                        const location = await fetchLocationName(latitude, longitude);
+                        const encodedLocation = encodeURIComponent(location);
+                        window.location.href = `{{ url_for('weather_forecast') }}?lat=${latitude}&lon=${longitude}&location=${encodedLocation}`;
+                    } catch (error) {
+                        alert('Error fetching location name: ' + error.message);
+                    }
+                }, (error) => {
+                    alert('Error getting location: ' + error.message);
+                });
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        }
+
+        async function fetchLocationName(lat, lon) {
+            try {
+                const response = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch location data.');
+                }
+                const data = await response.json();
+                return data.city || data.locality || 'Unknown location';
+            } catch (error) {
+                console.error(error);
+                return 'Unknown location';
+            }
+        }
+    </script>
+</body>
+</html>

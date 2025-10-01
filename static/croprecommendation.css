@@ -1,0 +1,226 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', Arial, sans-serif;
+  background: linear-gradient(to bottom, #8fd3f4, #84fab0);
+  color: #161616f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.recommendations-container {
+  width: 60%;
+  padding: 20px;
+  background: rgba(135, 245, 212, 0.6); 
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  margin-top: 80PX;
+}
+
+.header h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: #161616f3;
+}
+
+.header p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.form-container {
+  margin-top: 20px;
+}
+
+.input-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group {
+  width: 80%;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-group label {
+  font-size: 16px;
+  color: #161616f3;
+  flex: 1;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.form-group input {
+  flex: 2;
+  padding: 10px;
+  font-size: 14px;
+  border: 2px solid #161616f3;
+  border-radius: 5px;
+  background: #fff;
+  color: #333;
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: #4caf50; 
+}
+
+
+.generate-button {
+  margin-top: 20px;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background: #4caf50;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease;
+}
+
+.generate-button:hover {
+  background: #388e3c; 
+}
+
+@media (max-width: 768px) {
+  .recommendations-container {
+    width: 90%;
+  }
+
+  .form-group label {
+    font-size: 14px;
+  }
+
+  .form-group input {
+    font-size: 12px;
+  }
+
+  .generate-button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}
+
+.dashboard-header {
+  width: 94.5%;
+  margin-top:25px;
+  margin-left:30px;
+  margin-right:30px;
+  border-radius: 20px;
+  height: 70px;
+  background: #95eaff09;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  color: #161616f3;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-logo img {
+  width: 40px; /* Adjust size as needed */
+  height: 40px;
+  border-radius: 50%; /* Makes the logo round (optional) */
+}
+
+.header-logo span {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.header-nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.header-nav ul li {
+  margin-right: 35px;
+}
+.header-nav ul li a {
+  color: #161616f3;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s;
+  font-weight: bold;
+}
+
+.header-nav ul li a:hover {
+  color: #84fab0; 
+}
+
+/* Modal container */
+.modal {
+position: fixed;
+top: 100%; /* Start outside of the viewport */
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5);
+display: flex;
+justify-content: center;
+align-items: center;
+transition: top 0.5s ease; /* Slide-in effect */
+z-index: 1000;
+}
+
+/* Modal content */
+.modal-content {
+background-color: #fff;
+padding: 20px;
+width: 50%;
+text-align: center;
+border-radius: 10px;
+color: #333;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h2 {
+margin-bottom: 20px;
+color: #4caf50;
+}
+
+.modal-content p {
+font-size: 18px;
+}
+
+.close-btn {
+position: absolute;
+top: 20px;
+right: 30px;
+font-size: 24px;
+font-weight: bold;
+color: #333;
+cursor: pointer;
+}
+
+.close-btn:hover {
+color: red;
+}
+
+/* Show modal when active */
+.modal.active {
+top: 0; /* Slide into the viewport */
+}   
+

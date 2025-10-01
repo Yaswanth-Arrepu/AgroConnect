@@ -1,0 +1,105 @@
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: auto;
+}
+
+select, button {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.market-data {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+    font-size: 14px;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.pagination {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.pagination button {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.pagination button:hover {
+    background-color: #0056b3;
+}
+
+.pagination span {
+    font-size: 18px;
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #007bff;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+    display: none;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

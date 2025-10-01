@@ -1,0 +1,121 @@
+/* Import Poppins Font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(to bottom, #8fd3f4, #84fab0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.auth-card {
+    background: white;
+    padding: 40px; /* Generous padding for a balanced look */
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 90%; /* Default width as a percentage */
+    max-width: 650px; /* Increased max width for larger screens */
+    margin: auto;
+    box-sizing: border-box;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+.auth-title {
+    font-size: 2.4em; /* Increased font size for prominence */
+    font-weight: 600;
+    color: #4caf50;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #131212;
+}
+
+input {
+    width: 100%;
+    padding: 14px; /* Larger padding for a modern feel */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+button {
+    width: 100%;
+    padding: 16px; /* Increased button padding */
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.auth-links {
+    margin-top: 20px;
+}
+
+.auth-links a {
+    text-decoration: none;
+    color: #4caf50;
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .auth-card {
+        padding: 30px;
+        max-width: 90%; /* Scales down gracefully */
+    }
+
+    .auth-title {
+        font-size: 2.2em;
+    }
+}
+
+@media (max-width: 768px) {
+    .auth-card {
+        padding: 20px;
+        max-width: 95%; /* Ensures it fits smaller tablets and large phones */
+    }
+
+    .auth-title {
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 15px; /* Compact padding for small screens */
+        max-width: 100%; /* Full width for very small screens */
+    }
+
+    .auth-title {
+        font-size: 1.8em; /* Smaller font size for mobile */
+    }
+
+    input, button {
+        padding: 12px; /* Adjusted for better fit on smaller devices */
+    }
+}
